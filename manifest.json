@@ -1,0 +1,10 @@
+{
+  "Name": "SpeedController",
+  "Author": "Zazzooo",
+  "Version": "1.0.0",
+  "Description": "Simple mod that lets you increse your speed.",
+  "UniqueID": "SpeedController.Zazzooo",
+  "EntryDll": "speed_controller_smapi.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}
