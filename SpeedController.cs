@@ -19,8 +19,8 @@ namespace YourProjectName
         // main init
         public override void Entry(IModHelper helper)
         {
-            helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
-            helper.Events.Input.ButtonPressed += this.OnButtonPressed;
+            helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
+            helper.Events.Input.ButtonPressed += OnButtonPressed;
         }
 
         // event that runs every tick (60 times a second)
@@ -45,37 +45,41 @@ namespace YourProjectName
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
         {
             // ignore press if player hasn't loaded a save yet or is not on horse
-            if (!Context.IsWorldReady && !Game1.player.isRidingHorse())
+            if (!Context.IsWorldReady)
                 return;
             
             Farmer player = Game1.player;
 
-            if($"{e.Button}" == "K" && !isKeyPressedL && !isKeyPressedK)
+            if (Game1.player.isRidingHorse())
             {
-                SetPlayerSpeed(10);
-                ShowPrompt("You are SUPER fast.");
-                isKeyPressedK = !isKeyPressedK;
+                if ($"{e.Button}" == "K" && !isKeyPressedL && !isKeyPressedK)
+                {
+                    SetPlayerSpeed(10);
+                    ShowPrompt("You are SUPER fast.");
+                    isKeyPressedK = !isKeyPressedK;
 
-            }
-            else if ($"{e.Button}" == "K" && !isKeyPressedL && isKeyPressedK)
-            {
-                SetPlayerSpeed(1);
-                ShowPrompt("You are back to normal.");
-                isKeyPressedK = !isKeyPressedK;
+                }
+                else if ($"{e.Button}" == "K" && !isKeyPressedL && isKeyPressedK)
+                {
+                    SetPlayerSpeed(1);
+                    ShowPrompt("You are back to normal.");
+                    isKeyPressedK = !isKeyPressedK;
 
+                }
+                else if ($"{e.Button}" == "L" && !isKeyPressedK && !isKeyPressedL)
+                {
+                    SetPlayerSpeed(3);
+                    ShowPrompt("You are fast.");
+                    isKeyPressedL = !isKeyPressedL;
+                }
+                else if ($"{e.Button}" == "L" && !isKeyPressedK && isKeyPressedL)
+                {
+                    SetPlayerSpeed(1);
+                    ShowPrompt("You are back to normal.");
+                    isKeyPressedL = !isKeyPressedL;
+                }
             }
-            else if ($"{e.Button}" == "L" && !isKeyPressedK && !isKeyPressedL)
-            {
-                SetPlayerSpeed(3);
-                ShowPrompt("You are fast.");
-                isKeyPressedL = !isKeyPressedL;
-            }
-            else if ($"{e.Button}" == "L" && !isKeyPressedK && isKeyPressedL)
-            {
-                SetPlayerSpeed(1);
-                ShowPrompt("You are back to normal.");
-                isKeyPressedL = !isKeyPressedL;
-            }
+           
         }
 
         //sets the players speed
