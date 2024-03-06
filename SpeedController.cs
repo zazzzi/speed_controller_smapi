@@ -26,30 +26,6 @@ namespace YourProjectName
         // event that runs every tick (60 times a second)
         private void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
         {
-
-            if (Context.IsWorldReady && Game1.player.isRidingHorse())
-            {
-                // Check for keypresses and adjust player speed
-                if (isKeyPressedK)
-                {
-                    SetPlayerSpeed(10); 
-                    ShowPrompt("You are SUPER fast.");
-
-                }
-                else if (isKeyPressedL)
-                {
-                    SetPlayerSpeed(3); 
-                    ShowPrompt("You are fast.");
-
-                }
-                else if (!isKeyPressedK && !isKeyPressedL)
-                {
-                    SetPlayerSpeed(1);
-                    ShowPrompt("Running as normal.");
-                }
-
-            }
-
             // Check if the prompt is currently displayed and if it's time to hide it
             if (promptDisplayTimer > 0 && promptDisplayTimer >= promptDisplayTime * 60) // Convert seconds to ticks (60 ticks per second)
             {
