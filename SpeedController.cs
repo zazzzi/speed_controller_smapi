@@ -44,19 +44,22 @@ namespace YourProjectName
         //looks for button press
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
         {
-            // ignore press if player hasn't loaded a save yet or is not on horse
+            // ignore press if player hasn't loaded a save yet
             if (!Context.IsWorldReady)
                 return;
             
             Farmer player = Game1.player;
 
+            // checks if player is on horse
             if (Game1.player.isRidingHorse())
             {
+                // IF K is pressed
                 if ($"{e.Button}" == "K" && !isKeyPressedL && !isKeyPressedK)
                 {
                     SetPlayerSpeed(10);
                     ShowPrompt("You are SUPER fast.");
                     isKeyPressedK = !isKeyPressedK;
+                    Monitor.Log("Speed se to 10", LogLevel.Info);
 
                 }
                 else if ($"{e.Button}" == "K" && !isKeyPressedL && isKeyPressedK)
@@ -64,25 +67,29 @@ namespace YourProjectName
                     SetPlayerSpeed(1);
                     ShowPrompt("You are back to normal.");
                     isKeyPressedK = !isKeyPressedK;
+                    Monitor.Log("Speed se to 1", LogLevel.Info);
 
                 }
+                // IF L is pressed
                 else if ($"{e.Button}" == "L" && !isKeyPressedK && !isKeyPressedL)
                 {
-                    SetPlayerSpeed(3);
+                    SetPlayerSpeed(5);
                     ShowPrompt("You are fast.");
                     isKeyPressedL = !isKeyPressedL;
+                    Monitor.Log("Speed se to 5", LogLevel.Info);
                 }
                 else if ($"{e.Button}" == "L" && !isKeyPressedK && isKeyPressedL)
                 {
                     SetPlayerSpeed(1);
                     ShowPrompt("You are back to normal.");
                     isKeyPressedL = !isKeyPressedL;
+                    Monitor.Log("Speed se to 1", LogLevel.Info);
                 }
             }
            
         }
 
-        //sets the players speed
+        //sets the players speed from incoming int
         private void SetPlayerSpeed(int speed)
         {
             // Get the player instance
